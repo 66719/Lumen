@@ -1,6 +1,5 @@
-// Допоміжна функція для генерації випадкових зайнятих місць (від 1 до 60)
 function generateOccupiedSeats() {
-    const occupiedCount = Math.floor(Math.random() * 25); // Від 0 до 25 зайнятих місць на сеанс
+    const occupiedCount = Math.floor(Math.random() * 25);
     const occupied = new Set();
     while (occupied.size < occupiedCount) {
         occupied.add(Math.floor(Math.random() * 60) + 1);
@@ -8,15 +7,13 @@ function generateOccupiedSeats() {
     return Array.from(occupied).sort((a, b) => a - b);
 }
 
-// Допоміжна функція для генерації сеансів на 3-10 грудня
 function generateSessions() {
     const dates = ['2026-12-03', '2026-12-04', '2026-12-05', '2026-12-06', '2026-12-07', '2026-12-08', '2026-12-09', '2026-12-10'];
     const possibleTimes = ['10:00', '12:30', '14:15', '16:45', '19:00', '21:30', '23:15'];
     const sessions = [];
 
     dates.forEach(date => {
-        // Беремо випадкові 4-6 сеансів на кожен день, щоб розклад виглядав реалістично
-        const sessionsPerDay = Math.floor(Math.random() * 3) + 4; 
+        const sessionsPerDay = Math.floor(Math.random() * 3) + 4;
         const shuffledTimes = [...possibleTimes].sort(() => 0.5 - Math.random()).slice(0, sessionsPerDay).sort();
         
         shuffledTimes.forEach(time => {
@@ -31,13 +28,12 @@ function generateSessions() {
     return sessions;
 }
 
-// Головна база даних з 15 фільмами
 const moviesData = [
     {
         id: 'm1',
         title: 'Dune: Part Two',
         genre: 'Sci-Fi, Action',
-        poster: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2JGjjcNsV.jpg',
+        poster: 'assets/posters/dune.jpg',
         price: 15,
         description: 'The epic continuation of Paul Atreides journey on the planet Arrakis.',
         sessions: generateSessions()
@@ -46,7 +42,7 @@ const moviesData = [
         id: 'm2',
         title: 'Deadpool & Wolverine',
         genre: 'Comedy, Action',
-        poster: 'https://image.tmdb.org/t/p/w500/8cdWjvZQUztj3ea8iDaHkOFIie0.jpg',
+        poster: 'assets/posters/deadpool.jpg',
         price: 12,
         description: 'The irresponsible hero Deadpool will change the history of cinema forever.',
         sessions: generateSessions()
@@ -82,7 +78,7 @@ const moviesData = [
         id: 'm6',
         title: 'Avatar: The Way of Water',
         genre: 'Sci-Fi, Adventure',
-        poster: 'https://image.tmdb.org/t/p/w500/t6HIqrHeCPJsyXz4u1GzJ3B5pZ0.jpg',
+        poster: 'assets/posters/avatar.jpg',
         price: 16,
         description: 'Jake Sully lives with his newfound family formed on the extrasolar moon Pandora.',
         sessions: generateSessions()
@@ -136,7 +132,7 @@ const moviesData = [
         id: 'm12',
         title: 'Joker',
         genre: 'Crime, Drama',
-        poster: 'https://image.tmdb.org/t/p/w500/udDclJoHjfpt8z84a3L4D6FpQWz.jpg',
+        poster: 'assets/posters/joker.jpg',
         price: 11,
         description: 'In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society.',
         sessions: generateSessions()
@@ -145,7 +141,7 @@ const moviesData = [
         id: 'm13',
         title: 'John Wick: Chapter 4',
         genre: 'Action, Thriller',
-        poster: 'https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaiWHJ.jpg',
+        poster: 'assets/posters/john.jpg',
         price: 14,
         description: 'John Wick uncovers a path to defeating The High Table.',
         sessions: generateSessions()

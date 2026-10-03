@@ -63,7 +63,6 @@ body {
     color: var(--accent-hover);
 }
 
-/* Movies Grid */
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -71,13 +70,11 @@ body {
     margin-top: 30px;
 }
 
-
-/* --- СТИЛІ ДЛЯ КНОПОК ДАТ --- */
 .dates-container {
     display: flex;
     gap: 15px;
     margin-top: 20px;
-    overflow-x: auto; /* Дозволяє скролити дати горизонтально, якщо їх багато */
+    overflow-x: auto;
     padding-bottom: 10px;
 }
 
@@ -105,7 +102,6 @@ body {
     border-color: var(--accent);
 }
 
-/* --- СТИЛІ ДЛЯ КАРТОК ФІЛЬМІВ --- */
 .movie-card {
     background-color: var(--bg-card);
     border-radius: 12px;
@@ -163,8 +159,6 @@ body {
     color: var(--bg-main);
 }
 
-
-/* --- СТОРІНКА БРОНЮВАННЯ ТА ІНФО --- */
 .movie-info-card {
     display: flex;
     gap: 20px;
@@ -208,7 +202,6 @@ body {
     font-weight: bold;
 }
 
-/* --- КІНОЗАЛ ТА КРІСЛА --- */
 .cinema-hall {
     display: flex;
     flex-direction: column;
@@ -234,20 +227,18 @@ body {
 
 .seats-container {
     display: grid;
-    /* Перша колонка 30px для цифри ряду, далі 10 однакових колонок для крісел */
-    grid-template-columns: 30px repeat(10, 1fr); 
+    grid-template-columns: 30px repeat(10, 1fr);
     gap: 10px;
     align-items: center;
 }
 
 .seat {
-    width: 30px; /* Трохи збільшили, щоб помістилась цифра */
+    width: 30px;
     height: 30px;
     background-color: var(--bg-secondary);
     border-radius: 6px 6px 4px 4px;
     cursor: pointer;
     transition: 0.2s;
-    /* Нові властивості, щоб відцентрувати цифру всередині крісла */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -278,7 +269,6 @@ body {
     background-color: var(--accent);
 }
 
-/* --- ПАНЕЛЬ ПІДСУМКІВ --- */
 .summary-panel {
     background-color: var(--bg-card);
     padding: 20px;
