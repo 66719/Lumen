@@ -234,17 +234,34 @@ body {
 
 .seats-container {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    /* Перша колонка 30px для цифри ряду, далі 10 однакових колонок для крісел */
+    grid-template-columns: 30px repeat(10, 1fr); 
     gap: 10px;
+    align-items: center;
 }
 
 .seat {
-    width: 25px;
-    height: 25px;
+    width: 30px; /* Трохи збільшили, щоб помістилась цифра */
+    height: 30px;
     background-color: var(--bg-secondary);
     border-radius: 6px 6px 4px 4px;
     cursor: pointer;
     transition: 0.2s;
+    /* Нові властивості, щоб відцентрувати цифру всередині крісла */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-main);
+    font-weight: bold;
+}
+
+.row-label {
+    color: var(--text-secondary);
+    font-weight: bold;
+    text-align: right;
+    padding-right: 5px;
+    font-size: 14px;
 }
 
 .seat:not(.occupied):hover {
