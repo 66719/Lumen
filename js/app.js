@@ -191,61 +191,79 @@ timesContainer.addEventListener('click', (e) => {
 });
 
 // 6. Рендер сітки крісел
+// 6. Рендер сітки крісел (з рядами та номерами)
 function renderSeats() {
     seatsContainer.innerHTML = '';
-    const totalSeats = 60; // Нехай у нашому залі буде 60 місць
+    const totalRows = 6;
+    const seatsPerRow = 10;
+    let globalSeatIndex = 1; // Індекс для сумісності з нашою базою зайнятих місць (від 1 до 60)
     
-    for(let i = 1; i <= totalSeats; i++) {
-        const seat = document.createElement('div');
-        seat.classList.add('seat');
-        
-        // Перевіряємо, чи є поточне місце у масиві зайнятих
-        if(state.selectedSession.occupiedSeats.includes(i)) {
-            seat.classList.add('occupied');
+    for (let row = 1; row <= totalRows; row++) {
+        // Створюємо номер ряду зліва
+        const rowLabel = document.createElement('div');
+        rowLabel.classList.add('row-label');
+        rowLabel.innerText = row;
+        seatsContainer.appendChild(rowLabel);
+
+        // Генеруємо крісла для цього ряду
+        for (let seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
+            const seat = document.createElement('div');
+            seat.classList.add('seat');
+            seat.innerText = seatNum; // Додаємо цифру всередину крісла
+            
+            if (state.selectedSession.occupiedSeats.includes(globalSeatIndex)) {
+                seat.classList.add('occupied');
+            }
+            
+            // Зберігаємо всі координати в data-атрибути
+            seat.dataset.index = globalSeatIndex;
+            seat.dataset.row = row;
+            seat.dataset.seatNum = seatNum;
+            
+            seatsContainer.appendChild(seat);
+            globalSeatIndex++;
         }
-        
-        // Зберігаємо номер місця в data-атрибут для подальшої логіки кліків
-        seat.dataset.index = i;
-        seatsContainer.appendChild(seat);
     }
 }
 
-// 7. Оновлення панелі підсумків (поки пуста логіка, допишемо наступним кроком)
 // 8. Вибір місць (Event Delegation)
 seatsContainer.addEventListener('click', (e) => {
-    // Перевіряємо, чи клікнули саме по кріслу і чи воно не зайняте
     if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
-        
-        // Маніпуляція з класами: перемикаємо стан (вибрано/не вибрано)
         e.target.classList.toggle('selected');
         
-        // Отримуємо номер місця з data-атрибута
         const seatIndex = parseInt(e.target.dataset.index);
+        const seatRow = e.target.dataset.row;
+        const seatNum = e.target.dataset.seatNum;
         
-        // Управління станом: додаємо або видаляємо з масиву
-        if (state.selectedSeats.includes(seatIndex)) {
-            // Якщо місце вже є в масиві, видаляємо його
-            state.selectedSeats = state.selectedSeats.filter(seat => seat !== seatIndex);
+        // Шукаємо, чи є вже це місце в нашому масиві за його унікальним індексом
+        const existingSeatIndex = state.selectedSeats.findIndex(s => s.index === seatIndex);
+        
+        if (existingSeatIndex !== -1) {
+            // Якщо є — видаляємо його
+            state.selectedSeats.splice(existingSeatIndex, 1);
         } else {
-            // Якщо немає — додаємо
-            state.selectedSeats.push(seatIndex);
+            // Якщо немає — додаємо як об'єкт з детальною інформацією
+            state.selectedSeats.push({ index: seatIndex, row: seatRow, seat: seatNum });
         }
         
-        // Оновлюємо панель підсумків при кожному кліку
         updateSummary();
     }
 });
 
 // 9. Оновлення панелі підсумків
 function updateSummary() {
-    // Відображаємо кількість вибраних місць
-    countDisplay.innerText = state.selectedSeats.length;
+    if (state.selectedSeats.length > 0) {
+        // Перетворюємо кожен обраний об'єкт у рядок "Row X, Seat Y" і з'єднуємо їх через кому
+        const seatsText = state.selectedSeats.map(s => `Row ${s.row}, Seat ${s.seat}`).join(' | ');
+        countDisplay.innerText = seatsText;
+    } else {
+        countDisplay.innerText = '0';
+    }
     
-    // Рахуємо загальну суму
-    const total = state.selectedSeats.length * state.selectedMovie.price;
+    // Рахуємо загальну суму (кількість об'єктів у масиві * ціна)
+    const total = state.selectedSeats.length * (state.selectedMovie ? state.selectedMovie.price : 0);
     totalDisplay.innerText = total;
     
-    // Активуємо або деактивуємо кнопку "Book Tickets"
     if (state.selectedSeats.length > 0) {
         buyBtn.removeAttribute('disabled');
     } else {
