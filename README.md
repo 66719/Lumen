@@ -1,38 +1,22 @@
-# Internal IT Service Catalog
+# Lumen Cinema - Interactive Seat Booking System
 
 ## Overview
 
-This project is a client-side web application that simulates an internal corporate IT service portal. It is designed to demonstrate basic digital workflows and service request handling, specifically focusing on catalog items. The application provides an interface for employees to request work equipment, such as laptops or monitors, and software access.
+This project is a client-side single-page application (SPA) that simulates a modern cinema ticket booking experience. It features a dynamically generated movie catalog and an interactive seat selection interface, designed to demonstrate practical frontend development skills and state management without relying on a backend.
 
 ## Core Features
 
-### Dynamic Catalog Rendering
-
-The catalog items (Hardware, Software, Access) are generated dynamically on the page using JavaScript, which iterates through a hardcoded array of objects.
-
-### Service Request Management
-
-Users can add desired items to a "My Service Request" block by clicking the "Request Item" button, and they also have the ability to remove items from this list.
-
-### Real-time Budget Calculation
-
-As items are added or removed, the application automatically calculates the total cost and displays it as the "Total Department Budget Impact".
-
-### Mock Submission Workflow
-
-Clicking the "Submit Request" button mimics an automated business process by clearing the request list and displaying a confirmation message:
-
-"Request REQ00123 submitted successfully. Pending manager approval"
-
-### No Backend Required
-
-The entire logic and data storage are handled on the front end without the need for a database or server.
+- **Dynamic Content Rendering:** Movies, dates, and showtimes are dynamically generated on the page using JavaScript based on a structured data array.
+- **Interactive Cinema Hall:** Users can select available seats in a generated grid. Seats that are already occupied are dynamically assigned distinct classes and visually disabled.
+- **State Management:** The application effectively tracks and updates the user's current selection (active date, selected movie, session time, and specific seats including row numbers).
+- **Event Delegation:** Optimized event handling is implemented by attaching single listeners to parent containers (like the seat grid and date selectors) instead of binding hundreds of listeners to individual elements.
+- **Real-time Price Calculation:** The total ticket price dynamically recalculates as seats are selected or deselected.
 
 ## Technologies Used
 
-- HTML & CSS: For structuring and styling the internal portal interface.
-- Vanilla JavaScript: For implementing the core logic, including arrays, loops, event handling, and DOM manipulation.
+- **HTML5 & CSS3:** For semantic structure and a custom "Dark Cinema" UI theme with CSS variables.
+- **Vanilla JavaScript:** For DOM manipulation (using `classList`), complex array filtering, loops, and event delegation.
 
-## Objective
+## How to Run
 
-This project was developed to showcase practical JavaScript skills within a corporate business domain, reflecting an understanding of internal IT support processes and catalog-based request systems.
+This project runs entirely in the browser. Simply download or clone the repository and open the `index.html` file in any modern web browser. No local server, database, or backend configuration is required.
