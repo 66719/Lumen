@@ -1,4 +1,4 @@
-# Lumen Cinema - Interactive Seat Booking System
+# Lumen Cinema - Interactive Seat Booking System (Made with AI)
 
 ## Overview
 
